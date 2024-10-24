@@ -10,6 +10,7 @@ function ui.new()
         button.MouseButton1Click:Connect(callback)
         button.Parent = self.MAIN
     end
+    return gui
 end
 
 return ui
