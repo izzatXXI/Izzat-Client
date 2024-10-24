@@ -7,6 +7,7 @@ function ui:new()
     local gui = setmetatable({},{})
     gui.__index = gui
     gui.MAIN = Instance.new("ScreenGui",game.Players.LocalPlayer.PlayerGui)
+    gui.frames = 0
 
     function gui:section(name)
         local section = setmetatable({},{})
@@ -23,7 +24,8 @@ function ui:new()
         section.frame = s
         section.title = title
         title.Size = UDim2.fromScale(0.133,0.08)
-        title.Position = UDim2.fromOffset(60,80)
+        title.Position = UDim2.fromOffset(60 + (self.frames * 280),80)
+        self.frames+= 1
         title.BackgroundColor3 = Color3.fromRGB(65, 47, 116)
         title.TextColor3 = Color3.new(0,0,0)
         title.Text = name
@@ -37,8 +39,6 @@ function ui:new()
         s.Position = UDim2.fromScale(0,1)
         Instance.new("UIListLayout",s).Padding = UDim.new(0,15)
         Instance.new("UIPadding",s).PaddingTop = UDim.new(0,15)
-        -- button + padding = 1.3
-        -- sections = 210
 
         function section:button(name,callback)
             local button = Instance.new("TextButton",gui.MAIN)
