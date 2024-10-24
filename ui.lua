@@ -21,6 +21,7 @@ function ui:new()
         end)
         local s = Instance.new("Frame",title)
         section.frame = s
+        section.title = title
         title.Size = UDim2.fromScale(0.133,0.08)
         title.Position = UDim2.fromOffset(60,80)
         title.BackgroundColor3 = Color3.fromRGB(65, 47, 116)
@@ -43,9 +44,14 @@ function ui:new()
             local button = Instance.new("TextButton",gui.MAIN)
             button.Text = name
             button.MouseButton1Click:Connect(callback)
+            local f = self.frame
+            f.Size = f.Size + UDim2.fromOffset(0,65)
+            button.Size = UDim2.new(UDim.new(1,0),UDim.new(0,50))
+            button.Position = UDim2.fromScale(1,0)
             button.Parent = self.frame
             return button
         end
+        return section
     end
     return gui
 end
