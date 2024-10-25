@@ -43,7 +43,7 @@ function ui:new()
         function section:button(name,callback)
             local button = Instance.new("TextButton",gui.MAIN)
             button.Text = name
-            button.MouseButton1Down:Connect(callback)
+            button.MouseButton1Click:Connect(callback)
             local f = self.frame
             f.Size = f.Size + UDim2.fromOffset(0,65)
             button.Size = UDim2.new(UDim.new(1,0),UDim.new(0,50))
@@ -53,6 +53,11 @@ function ui:new()
         end
         return section
     end
+    uis.InputBegan:Connect(function(input, gameProcessedEvent)
+        if input.KeyCode == Enum.KeyCode.RightShift then
+            ui.Enabled = not ui.Enabled
+        end
+    end)
     return gui
 end
 
