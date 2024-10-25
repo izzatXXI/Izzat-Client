@@ -43,7 +43,7 @@ function ui:new()
         function section:button(name,callback)
             local button = Instance.new("TextButton",gui.MAIN)
             button.Text = name
-            button.MouseButton1Click:Connect(callback)
+            button.MouseButton1Down:Connect(callback)
             local f = self.frame
             f.Size = f.Size + UDim2.fromOffset(0,65)
             button.Size = UDim2.new(UDim.new(1,0),UDim.new(0,50))
