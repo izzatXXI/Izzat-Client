@@ -55,7 +55,7 @@ function ui:new()
     end
     uis.InputBegan:Connect(function(input, gameProcessedEvent)
         if input.KeyCode == Enum.KeyCode.RightShift then
-            gui.MAIN.Enabled = not ui.Enabled
+            gui.MAIN.Enabled = not gui.MAIN.Enabled
         end
     end)
     return gui
