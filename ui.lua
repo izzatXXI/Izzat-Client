@@ -40,16 +40,25 @@ function ui:new()
         Instance.new("UIListLayout",s).Padding = UDim.new(0,15)
         Instance.new("UIPadding",s).PaddingTop = UDim.new(0,15)
 
-        function section:button(name,callback)
+        function section:button(name,callback,keybind)
+            local buttonmm = setmetatable({},{})
             local button = Instance.new("TextButton",gui.MAIN)
             button.Text = name
             button.MouseButton1Click:Connect(callback)
+            uis.InputBegan:Connect(function(k,g)
+                if g then return end
+                if k.KeyCode == keybind then
+                    callback()
+                end
+            end)
             local f = self.frame
             f.Size = f.Size + UDim2.fromOffset(0,65)
             button.Size = UDim2.new(UDim.new(1,0),UDim.new(0,50))
             button.Position = UDim2.fromScale(1,0)
             button.Parent = self.frame
-            return button
+            buttonmm.btn = button
+            buttonmm.keybind = keybind or nil
+            return buttonmm
         end
         return section
     end
