@@ -13,7 +13,6 @@ function ui:new(parent)
     gui.__index = gui
     gui.MAIN = Instance.new("ScreenGui",parent)
     gui.frames = 0
-    gui.keybinds = {}
 
     function gui:section(name)
         local section = setmetatable({},{})
@@ -72,9 +71,6 @@ function ui:new(parent)
             buttonmm.value = false
             button.BackgroundColor3 = buttonColors[tostring(buttonmm.value)]
             buttonmm.keybind = keybind or nil
-            if keybind then
-                ui.keybinds[name] = keybind
-            end
             return buttonmm
         end
         return section
