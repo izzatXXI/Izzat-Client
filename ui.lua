@@ -82,3 +82,5 @@ function ui:new(parent)
     end)
     return gui
 end
+
+return ui
