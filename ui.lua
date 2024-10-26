@@ -3,10 +3,15 @@ local ui = {}
 local uis = game:GetService("UserInputService")
 local mouse = game.Players.LocalPlayer:GetMouse()
 
-function ui:new()
+local buttonColors = {
+    ["true"] = Color3.new(0,0.7,0);
+    ['false'] = Color3.new(0.4,0,1)
+}
+
+function ui:new(parent)
     local gui = setmetatable({},{})
     gui.__index = gui
-    gui.MAIN = Instance.new("ScreenGui",game.Players.LocalPlayer.PlayerGui)
+    gui.MAIN = Instance.new("ScreenGui",parent)
     gui.frames = 0
 
     function gui:section(name)
@@ -44,11 +49,17 @@ function ui:new()
             local buttonmm = setmetatable({},{})
             local button = Instance.new("TextButton",gui.MAIN)
             button.Text = name
-            button.MouseButton1Click:Connect(callback)
+            button.MouseButton1Click:Connect(function()
+                callback()
+                buttonmm.value = not buttonmm.value
+                buttonmm.btn.BackgroundColor3 = buttonColors[tostring(buttonmm.value)]
+            end)
             uis.InputBegan:Connect(function(k,g)
                 if g then return end
                 if k.KeyCode == keybind then
                     callback()
+                    buttonmm.value = not buttonmm.value
+                    buttonmm.btn.BackgroundColor3 = buttonColors[tostring(buttonmm.value)]
                 end
             end)
             local f = self.frame
@@ -57,6 +68,8 @@ function ui:new()
             button.Position = UDim2.fromScale(1,0)
             button.Parent = self.frame
             buttonmm.btn = button
+            buttonmm.value = false
+            button.BackgroundColor3 = buttonmm.value
             buttonmm.keybind = keybind or nil
             return buttonmm
         end
