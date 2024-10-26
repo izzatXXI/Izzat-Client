@@ -49,7 +49,7 @@ function ui:new(parent)
             local buttonmm = setmetatable({},{})
             local button = Instance.new("TextButton",gui.MAIN)
             button.Text = name
-            button.MouseButton1Click:Connect(function()
+            button.MouseButton1Down:Connect(function()
                 callback()
                 buttonmm.value = not buttonmm.value
                 buttonmm.btn.BackgroundColor3 = buttonColors[tostring(buttonmm.value)]
