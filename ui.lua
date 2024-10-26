@@ -69,7 +69,7 @@ function ui:new(parent)
             button.Parent = self.frame
             buttonmm.btn = button
             buttonmm.value = false
-            button.BackgroundColor3 = buttonColors[tostring(buttonmm.value)]
+            buttonmm.btn.BackgroundColor3 = buttonColors[tostring(buttonmm.value)]
             buttonmm.keybind = keybind or nil
             return buttonmm
         end
