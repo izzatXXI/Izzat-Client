@@ -47,6 +47,7 @@ function ui:new(parent)
 
         function section:button(name,callback,keybind)
             local buttonmm = setmetatable({},{})
+            buttonmm.value = false
             local button = Instance.new("TextButton",gui.MAIN)
             button.Text = name
             button.MouseButton1Click:Connect(function()
@@ -68,7 +69,6 @@ function ui:new(parent)
             button.Position = UDim2.fromScale(1,0)
             button.Parent = self.frame
             buttonmm.btn = button
-            buttonmm.value = false
             button.BackgroundColor3 = buttonColors[tostring(buttonmm.value)]
             buttonmm.keybind = keybind or nil
             return buttonmm
