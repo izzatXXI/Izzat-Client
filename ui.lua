@@ -1,4 +1,4 @@
-local UI = {}
+local ui = {}
 
 local uis = game:GetService("UserInputService")
 local mouse = game.Players.LocalPlayer:GetMouse()
@@ -8,7 +8,7 @@ local buttonColors = {
     ['false'] = Color3.new(0.4,0,1)
 }
 
-function UI:new(parent)
+function ui:new(parent)
     local gui = setmetatable({},{})
     gui.__index = gui
     gui.MAIN = Instance.new("ScreenGui",parent)
