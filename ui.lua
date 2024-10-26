@@ -1,4 +1,4 @@
-local ui = {}
+local UI = {}
 
 local uis = game:GetService("UserInputService")
 local mouse = game.Players.LocalPlayer:GetMouse()
@@ -8,11 +8,12 @@ local buttonColors = {
     ['false'] = Color3.new(0.4,0,1)
 }
 
-function ui:new(parent)
+function UI:new(parent)
     local gui = setmetatable({},{})
     gui.__index = gui
     gui.MAIN = Instance.new("ScreenGui",parent)
     gui.frames = 0
+    gui.keybinds = {}
 
     function gui:section(name)
         local section = setmetatable({},{})
@@ -49,7 +50,7 @@ function ui:new(parent)
             local buttonmm = setmetatable({},{})
             local button = Instance.new("TextButton",gui.MAIN)
             button.Text = name
-            button.MouseButton1Down:Connect(function()
+            button.MouseButton1Click:Connect(function()
                 callback()
                 buttonmm.value = not buttonmm.value
                 buttonmm.btn.BackgroundColor3 = buttonColors[tostring(buttonmm.value)]
@@ -69,8 +70,11 @@ function ui:new(parent)
             button.Parent = self.frame
             buttonmm.btn = button
             buttonmm.value = false
-            buttonmm.btn.BackgroundColor3 = buttonColors[tostring(buttonmm.value)]
+            button.BackgroundColor3 = buttonColors[tostring(buttonmm.value)]
             buttonmm.keybind = keybind or nil
+            if keybind then
+                UI.keybinds[name] = keybind
+            end
             return buttonmm
         end
         return section
